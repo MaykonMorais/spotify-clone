@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 72px;
+  height: 58px;
   background: #282828;
   padding: 12px;
 
@@ -68,7 +68,7 @@ export const Controls = styled.div`
 export const Time = styled.div`
   display: flex;
   align-items: center;
-  margin-top: 5px;
+  margin-top: 2px;
 
   span {
     font-size: 11px;
@@ -78,5 +78,5 @@ export const Time = styled.div`
 
 export const ProgressSlider = styled.div`
   width: 500px;
-  margin: 0 15px;
+  margin: 0 12px;
 `;

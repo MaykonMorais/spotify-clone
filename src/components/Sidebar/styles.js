@@ -8,7 +8,7 @@ export const Container = styled.aside`
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: end;
 
   > div {
     padding: 25px;
