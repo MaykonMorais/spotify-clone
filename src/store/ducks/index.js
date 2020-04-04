@@ -1,5 +1,5 @@
 /**
- * Ficará toda parte de reducers e actions
+ * Combinará todos os reducers
  */
 
 // juntar todos os reducers

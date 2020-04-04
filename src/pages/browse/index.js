@@ -1,46 +1,38 @@
-import React from "react";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as PlaylistsActions } from "../../store/ducks/playlists";
 
 import { Container, Title, List, Playlist } from "./styles.js";
 
-const Browse = () => (
-  <Container>
-    <Title>Navegar</Title>
+class Browse extends Component {
+  componentDidMount() {
+    this.props.getPlaylistRequest();
+  }
 
-    <List>
-      <Playlist to="/playlist/1">
-        <img
-          src="https://d3pbkubkud8ly4.cloudfront.net/images/medium/1105_Lo-Fi_Nights_800.jpg?1561474974"
-          alt="Lofi Playlist"
-        />
-        <strong>Lofi Hip-Hop</strong>
-        <p>Relaxe enquanto você ouve Lofi hip-hop</p>
-      </Playlist>
-      <Playlist to="/playlist/1">
-        <img
-          src="https://d3pbkubkud8ly4.cloudfront.net/images/medium/1105_Lo-Fi_Nights_800.jpg?1561474974"
-          alt="Lofi Playlist"
-        />
-        <strong>Lofi Hip-Hop</strong>
-        <p>Relaxe enquanto você ouve Lofi hip-hop</p>
-      </Playlist>
-      <Playlist to="/playlist/1">
-        <img
-          src="https://d3pbkubkud8ly4.cloudfront.net/images/medium/1105_Lo-Fi_Nights_800.jpg?1561474974"
-          alt="Lofi Playlist"
-        />
-        <strong>Lofi Hip-Hop</strong>
-        <p>Relaxe enquanto você ouve Lofi hip-hop</p>
-      </Playlist>
-      <Playlist to="/playlist/1">
-        <img
-          src="https://d3pbkubkud8ly4.cloudfront.net/images/medium/1105_Lo-Fi_Nights_800.jpg?1561474974"
-          alt="Lofi Playlist"
-        />
-        <strong>Lofi Hip-Hop</strong>
-        <p>Relaxe enquanto você ouve Lofi hip-hop</p>
-      </Playlist>
-    </List>
-  </Container>
-);
+  render() {
+    return (
+      <Container>
+        <Title>Navegar</Title>
 
-export default Browse;
+        <List>
+          {this.props.playlists.data.map((playlist) => (
+            <Playlist key={playlist.key}>
+              <img src={playlist.thumbnail} alt={playlist.title} />
+              <strong>{playlist.title}</strong>
+              <p>{playlist.description}</p>
+            </Playlist>
+          ))}
+        </List>
+      </Container>
+    );
+  }
+}
+
+const mapStateToProps = (state) => ({
+  playlists: state.playlists,
+});
+
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(PlaylistsActions, dispatch);
+export default connect(mapStateToProps, mapDispatchToProps)(Browse);
