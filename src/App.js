@@ -9,13 +9,15 @@ import Header from "./components/Header";
 
 import { Wrapper, Container, Content } from "./styles/components";
 
+import "./config/reactotron";
+
 import Routes from "./routes/index";
 
 const App = () => {
   return (
     <BrowserRouter>
-      <GlobalStyle />
       <Wrapper>
+        <GlobalStyle />
         <Container>
           <Sidebar />
           <Content>
