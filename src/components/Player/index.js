@@ -1,5 +1,10 @@
 import React from "react";
 import Slider from "rc-slider";
+import Sound from "react-sound";
+
+import PropTypes from "prop-types";
+
+import { connect } from "react-redux";
 
 import {
   Container,
@@ -8,7 +13,7 @@ import {
   Controls,
   Progress,
   Time,
-  ProgressSlider
+  ProgressSlider,
 } from "./styles";
 
 import VolumeIcon from "../../assets/images/volume.svg";
@@ -19,8 +24,11 @@ import BackwardIcon from "../../assets/images/backward.svg";
 import ForwardIcon from "../../assets/images/forward.svg";
 import RepeatIcon from "../../assets/images/repeat.svg";
 
-const Sidebar = () => (
+const Player = ({ player }) => (
   <Container>
+    {!!player.currentSong && (
+      <Sound url={player.currentSong.file} playStatus={player.status} />
+    )}
     <Current>
       <img
         src="https://upload.wikimedia.org/wikipedia/pt/1/19/Linkin_Park_-_One_More_Light_%28capa%29.jpg"
@@ -76,4 +84,17 @@ const Sidebar = () => (
   </Container>
 );
 
-export default Sidebar;
+Player.propTypes = {
+  player: PropTypes.shape({
+    currentSong: PropTypes.shape({
+      file: PropTypes.string,
+    }),
+    status: PropTypes.string,
+  }).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  player: state.player,
+});
+
+export default connect(mapStateToProps)(Player);
